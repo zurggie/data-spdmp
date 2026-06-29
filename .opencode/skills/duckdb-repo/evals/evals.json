@@ -1,0 +1,90 @@
+{
+  "skill_name": "duckdb-agent",
+  "evals": [
+    {
+      "id": 1,
+      "name": "database-discovery",
+      "prompt": "I need to explore the DuckDB data warehouse. Can you help me find out what databases are available?",
+      "expected_output": "Call GET /duckdb-agent/databases → list available databases → ask which one to explore further.",
+      "expectations": [
+        "Calls GET /duckdb-agent/databases first",
+        "Presents databases as a bullet list (e.g., 2025-06, 2026-02)",
+        "Asks user which database to explore"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "schema-exploration",
+      "prompt": "Can you show me what tables are in the 2025-06 database and give me a sample of the first table?",
+      "expected_output": "Query information_schema.tables → describe the first table's columns → sample 5 rows. Results presented as readable formatted tables.",
+      "expectations": [
+        "Uses POST /duckdb-agent/query on database '2025-06'",
+        "Queries information_schema.tables for table listing",
+        "Describes a table using DESCRIBE",
+        "Samples rows with LIMIT 5",
+        "Presents results as formatted tables, not raw TOON"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "cross-database-query",
+      "prompt": "I need to find students whose IDs appear in both the 2025-06 and 2026-02 databases. Can you help me with that?",
+      "expected_output": "Discover tables in both databases → write a cross-database JOIN query using /memory/query → present results.",
+      "expectations": [
+        "First explores schemas of both databases",
+        "Uses POST /duckdb-agent/memory/query with both databases in dbs",
+        "Uses fully qualified table names (\"2025-06\".main and \"2026-02\".main)",
+        "Presents results as a formatted table",
+        "Explains that this is a cross-database join"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "download-results",
+      "prompt": "I want to export the entire 'students' table from the 2025-06 database as an Excel file. Can you do that?",
+      "expected_output": "Use POST /duckdb-agent/download with table='students', format='xlsx', db='2025-06' → save the file.",
+      "expectations": [
+        "Uses POST /duckdb-agent/download endpoint",
+        "Sets db='2025-06', table='students', format='xlsx'",
+        "Saves to a file with appropriate name",
+        "Returns the file path to the user"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "natural-language-query",
+      "prompt": "How many records are in each table in the 2026-02 database?",
+      "expected_output": "Query information_schema.tables to get table list → write COUNT queries for each table → present counts as a formatted table.",
+      "expectations": [
+        "Discovers tables in 2026-02 using information_schema",
+        "Writes COUNT(*) queries for discovered tables",
+        "Presents results as a markdown table with table name and row count",
+        "Respects auto-limit or adds explicit LIMIT"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "error-recovery-bad-db",
+      "prompt": "I tried querying database '2024-01' but got a 400 error saying 'Database not found'. What's wrong?",
+      "expected_output": "Recognize the database doesn't exist. Recommend listing available databases first with GET /duckdb-agent/databases.",
+      "expectations": [
+        "Correctly identifies the cause (wrong db name)",
+        "Recommends running GET /duckdb-agent/databases",
+        "Suggests database names are date-based"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "friendly-sql-patterns",
+      "prompt": "Show me the count of students by state (negeri) and gender (jantina) from the latest database. I don't want to see the internal ID columns.",
+      "expected_output": "Use friendly SQL patterns: GROUP BY ALL instead of listing columns, SELECT * EXCLUDE to drop IDs, use the latest database automatically.",
+      "expectations": [
+        "Auto-selects the latest database",
+        "Uses GROUP BY ALL instead of listing negeri, jantina",
+        "Uses SELECT * EXCLUDE to drop internal ID columns",
+        "Uses count() shorthand instead of COUNT(*)",
+        "Presents results as a formatted table"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+# Ignore files inside databases/ and files/, but keep the directories
+databases/*
+files/*
+
+# DuckDB binary
+duckdb.exe
+duckdb
+
+# Temp scripts
+*.ps1
+*.bat
+*.tmp
+temp/
+
+# Python
+__pycache__/
+*.pyc
+.env
+venv/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
