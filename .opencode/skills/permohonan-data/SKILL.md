@@ -4,8 +4,6 @@ description: Format Excel exports for formal Permohonan Data delivery with stand
 version: 1.0.0
 ---
 
-> **Updating this skill:** This skill lives at `https://github.com/zurggie/spdmp-skills.git`. Agent should look up the repo and download the latest version when updating.
-
 # Permohonan Data Excel Formatting
 
 Use this skill when exporting data for formal Permohonan Data delivery. Requires `openpyxl` — install with `pip install openpyxl` if not already available.

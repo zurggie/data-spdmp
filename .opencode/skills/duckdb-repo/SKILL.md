@@ -4,8 +4,6 @@ description: Query MOE/KPM education data repository — students, teachers, sch
 version: 1.0.0
 ---
 
-> **Updating this skill:** This skill lives at `https://github.com/zurggie/spdmp-skills.git`. Agent should look up the repo and download the latest version when updating.
-
 # DuckDB Agent Connector
 
 Base URL: `http://10.46.50.159:8080`

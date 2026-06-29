@@ -4,8 +4,6 @@ description: KPM/MOE education data: table catalog, key columns, joins, code val
 version: 1.0.0
 ---
 
-> **Updating this skill:** This skill lives at `https://github.com/zurggie/spdmp-skills.git`. Agent should look up the repo and download the latest version when updating.
-
 # MOE Education Data — Data Model Reference
 
 Domain pointer reference for MOE/KPM education data in DuckDB. Use this skill to find the **right base table, the right join keys, the right filter, and the right code values** for a request about Malaysian school data. No rigid SQL recipes — construct queries from the pointers here.

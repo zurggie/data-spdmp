@@ -62,25 +62,11 @@ When querying the MOE warehouse via HTTP, follow the workflow in **duckdb-repo**
 - **Always cleanup temp scripts** — delete any temporary scripts/files after use.
 - **Before creating any new temp script**, check for old leftover temp scripts that were forgotten; delete them first.
 
-## Skill Updates
-
-Skills are tracked at `https://github.com/zurggie/spdmp-skills` (`master` branch, under `skills/`). To update, download the repo ZIP and extract only the skill folders:
-
-```powershell
-curl.exe -L -o "$env:TEMP\spdmp-skills.zip" https://github.com/zurggie/spdmp-skills/archive/master.zip
-Expand-Archive -Path "$env:TEMP\spdmp-skills.zip" -DestinationPath "$env:TEMP\spdmp-skills" -Force
-Copy-Item -Path "$env:TEMP\spdmp-skills\spdmp-skills-master\skills\*" -Destination ".opencode\skills\" -Recurse -Force
-Remove-Item -Path "$env:TEMP\spdmp-skills.zip", "$env:TEMP\spdmp-skills" -Recurse -Force
-```
-
-Single HTTP request, no per-file API calls.
-
 ## Pre-Flight
 
 - [ ] Connected to MOE network (office or GlobalProtect VPN) — **remote only**
 - [ ] Base URL: `http://10.46.50.159:8080`
 - [ ] Read-only: no INSERT, UPDATE, DELETE, DROP, ALTER, CREATE
-- [ ] Skills up-to-date with `github.com/zurggie/spdmp-skills`
 
 Skills provide specialized instructions and workflows for specific tasks.
 Use the skill tool to load a skill when a task matches its description.

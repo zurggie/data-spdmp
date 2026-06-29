@@ -4,8 +4,6 @@ description: DuckDB SQL dialect reference for querying — SELECT, FROM-first, s
 version: 1.0.0
 ---
 
-> **Updating this skill:** This skill lives at `https://github.com/zurggie/spdmp-skills.git`. Agent should look up the repo and download the latest version when updating.
-
 # DuckDB SQL Reference
 
 DuckDB's SQL dialect reference for **querying only** — SELECT, VIEWs, and MACROs that help queries, but no mutation statements (INSERT, UPDATE, DELETE, DROP, ALTER, CREATE TABLE).
