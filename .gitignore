@@ -1,10 +1,8 @@
 # Ignore files inside databases/ and files/, but keep the directories
 databases/*
 files/*
+!.gitkeep
 
-# DuckDB binary
-duckdb.exe
-duckdb
 
 # Temp scripts
 *.ps1
