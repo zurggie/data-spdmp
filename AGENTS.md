@@ -61,6 +61,7 @@ When querying the MOE warehouse via HTTP, follow the workflow in **duckdb-repo**
 - **Plain language first with audit trail**: When showing results, explain in **plain natural language** what was queried and why. Be explicit about: (a) which tables were joined and how (join keys, join type), (b) every filter applied and why, (c) how the numbers relate across tables (e.g. "this count is lower because we filtered out school type 408"). The goal is to surface any **anomaly in filtering or joining** so the user can catch mistakes early. Only show raw SQL if asked.
 - **Always cleanup temp scripts** — delete any temporary scripts/files after use.
 - **Before creating any new temp script**, check for old leftover temp scripts that were forgotten; delete them first.
+- **Never sum/aggregate using the LLM** — when results contain totals, sums, counts, or any aggregation, always compute them in SQL (`SUM()`, `COUNT()`, etc.) or via a tool (e.g. `count`). Never sum, average, or tally numbers from row output by hand. The LLM is unreliable for arithmetic over many rows.
 
 ## Pre-Flight
 
