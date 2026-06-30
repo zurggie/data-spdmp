@@ -62,6 +62,7 @@ When querying the MOE warehouse via HTTP, follow the workflow in **duckdb-repo**
 - **Always cleanup temp scripts** — delete any temporary scripts/files after use.
 - **Before creating any new temp script**, check for old leftover temp scripts that were forgotten; delete them first.
 - **Never sum/aggregate using the LLM** — when results contain totals, sums, counts, or any aggregation, always compute them in SQL (`SUM()`, `COUNT()`, etc.) or via a tool (e.g. `count`). Never sum, average, or tally numbers from row output by hand. The LLM is unreliable for arithmetic over many rows.
+- **Always use DuckDB to query CSV** — never use PowerShell string-search tools (`Select-String`, `findstr`, `grep`) on CSV data. Use DuckDB's native CSV reading (e.g. `SELECT * FROM read_csv_auto('files/...')`) to query, filter, aggregate, and join. Python/pandas is acceptable.
 
 ## Pre-Flight
 
